@@ -40,8 +40,9 @@ def buscar_p():
 
 def editar_p():
     precio = float(input("Product price to update: "))
-    for precio in inventario:
-        if inventario[precio] == precio:
+    bs=inventario.get(precio)
+    for bs in inventario:
+        if bs== precio:
             nuevo_precio = int(input(f"new price: "))
             
             if nuevo_precio:
@@ -49,7 +50,7 @@ def editar_p():
                 
             print("Price updated.\n")
             return
-    print(f"price '{precio}' didn't found.\n")
+    print(f"price ,{precio}, didn't found.\n")
     
     
 
