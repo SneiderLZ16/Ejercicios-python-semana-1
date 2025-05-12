@@ -131,3 +131,20 @@ while True:
             break
     except ValueError:
         print("Invalid input. Please enter a valid option (1-6).")
+
+
+This Python script allows you to manage a product inventory. You can add products, search for products by name, update prices, delete products, and calculate the total value of the inventory. The program performs various validations to ensure that the inputs are valid.
+Description
+The code implements a simple system to manage a product inventory. It allows the user to perform the following actions:
+• Add product: Add a new product to the inventory with its name, price, and quantity.
+• Search product: Search for a product by its name and display its price and available quantity.
+• Update price: Update the price of an existing product.
+• Delete product: Delete a product from the inventory if it has available stock.
+• Calculate total: Calculate the total value of the inventory by multiplying the price by the quantity of each product.
+• Exit: End the execution of the program.
+Validations
+The script performs the following validations:
+• Product already exists: If you try to add a product that already exists in the inventory, an error message will be displayed.
+• Invalid price: If the entered price is negative, zero, or not a valid number, an error message will appear.
+• Invalid quantity: If the entered quantity is negative, zero, or not a valid number, an error message will appear.
+• Product not found: If you try to update or delete a product that doesn't exist, an error message will appear.
