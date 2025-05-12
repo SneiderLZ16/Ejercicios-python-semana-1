@@ -1,72 +1,97 @@
 
 
-inventario = {}
+inventary = {}
 
 
-def añadir_producto():
-    producto = input("Product name: ").strip()
-    if producto in inventario:
+# method to add product
+def add_product():
+    product = input("Product name: ").strip()
+    if product in inventary:
         print("This product already exists in the catalog.\n")
         return
-
-    precio = float(input("Price: ").strip())
     
+    try:
+        
+        price = float(input("Price: ").strip())
+        if price <=0:
+            raise ValueError
+    except ValueError:
+        print("Invalid price")
+        return
 
     try:
-        cantidad = int(input("Amount of product: "))
-        if cantidad <= 0:
+        amount = int(input("Amount of product: "))
+        if amount <= 0:
             raise ValueError
     except ValueError:
         print("Invalid number")
         return
 
-    inventario[producto] = {
-        "precio": precio,
-        "cantidad_disponible": cantidad,
+    inventary[product] = {
+        "price": price,
+        "amount_available": amount,
     }
 
-    print(f"product '{producto}' added successfully.\n")
+    print(f"product '{product}' added successfully.\n")
     
-    
-def buscar_p():
-    producto = input("Enter product to search: ").strip()
-    bs = inventario.get(producto)
+# method to search for product
+def search_p():
+    product = input("Enter product to search: ").strip()
+    bs = inventary.get(product)
     if bs:
-        print(f"\nProduct: {producto}")
-        print(f"Price: {bs['precio']}")
-        print(f"Products availables: {bs['cantidad_disponible']}")
+        print(f"\nProduct: {product}")
+        print(f"Price: {bs['price']}")
+        print(f"Products availables: {bs['amount availables']}")
     else:
         print("product not found in the catalog.\n")
 
-def editar_p():
-    producto = input("Enter product to update: ").strip()
-    if producto in inventario:
-        nuevo_precio = float(input(f"New price for '{producto}': "))
-        inventario[producto]["precio"] = nuevo_precio
-        print(f"Price for '{producto}' updated to {nuevo_precio}.\n")
+# method to update price
+def update_p():
+    product = input("Enter product to update: ").strip()
+    if product in inventary:
+        try:
+            new_price = float(input(f"New price for '{product}': "))
+            if new_price<=0:
+                raise ValueError
+        except ValueError:
+            print("Invalid value")
+            return
+        inventary[product]["price"] = new_price
+        print(f"Price for '{product}' updated to {new_price}.\n")
     else:
-        print(f"Product '{producto}' not found.\n")
+        print(f"Product '{product}' not found.\n")
 
-
-
-def eliminar_prod():
-    producto = input("Enter the product to delete: ").strip()
-    bs = inventario.get(producto)
+#method to delete record
+def delete_prod():
+    product = input("Enter the product to delete: ").strip()
+    bs = inventary.get(product)
     if bs:
-        if bs['cantidad_disponible']>0:
-            del inventario[producto]
-            print(f"product '{producto}' removed from the catalog.\n")
+        if bs['amount_available']>0:
+            del inventary[product]
+            print(f"product '{product}' removed from the catalog.\n")
     else:
         print("product not found in the catalog.\n")
+
+#method to calculate total inventory value
+def calc_total():
+    smt=1
+    try:
         
+        for product in inventary:
+            total= inventary[product]["price"]
+            cn=inventary[product]["amount_available"]
+            sm=total*cn
+            if sm<=0:
+                raise ValueError
+            smt+=sm
+        print("Your net is: ",sm)
+    except ValueError:
+        print("There isn't current net")
+        return
         
 
-def calc_to():
-    print
-    
-
-
-def mostrar_menu():
+# Method to display options
+def display():
     print("=== inventory processing ===")
     print("1. Add product")
     print("2. Search product")
@@ -77,23 +102,28 @@ def mostrar_menu():
 
 
 
-
-
-while True:
-    mostrar_menu()
-    opcion = int(input("Select an option (1-6): ").strip())
-    print()
-    
-    if opcion == 1:
-        añadir_producto()
-    elif opcion==2:
-        buscar_p()
-    elif opcion==3:
-        editar_p()
-    elif opcion==4:
-        eliminar_prod()
-    elif opcion==5:
-        calc_to()
-    elif opcion==6:
-        False
+# main loop
+C=True
+while C==True:
+    try:
+        display()
+        option = int(input("Select an option (1-6): ").strip())
+        print()
+        if option == 1:
+            add_product()
+        elif option==2:
+            search_p()
+        elif option==3:
+            update_p()
+        elif option==4:
+            delete_prod()
+        elif option==5:
+            calc_total()
+        elif option==6:
+            C=False
+        raise ValueError
+    except ValueError:
+        print()
+        
+        
         
