@@ -39,20 +39,14 @@ def buscar_p():
         print("product not found in the catalog.\n")
 
 def editar_p():
-    precio = float(input("Product price to update: "))
-    bs=inventario.get(precio)
-    for bs in inventario:
-        if bs== precio:
-            nuevo_precio = int(input(f"new price: "))
-            
-            if nuevo_precio:
-                inventario[precio] = nuevo_precio
-                
-            print("Price updated.\n")
-            return
-    print(f"price ,{precio}, didn't found.\n")
-    
-    
+    producto = input("Enter product to update: ").strip()
+    if producto in inventario:
+        nuevo_precio = float(input(f"New price for '{producto}': "))
+        inventario[producto]["precio"] = nuevo_precio
+        print(f"Price for '{producto}' updated to {nuevo_precio}.\n")
+    else:
+        print(f"Product '{producto}' not found.\n")
+
 
 
 def eliminar_prod():
