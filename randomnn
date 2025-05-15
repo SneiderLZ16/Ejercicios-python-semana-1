@@ -1,0 +1,46 @@
+import random
+
+# Función para jugar a adivinar el número
+def adivinar_numero():
+    print("¡Bienvenido al juego de adivinar el número!")
+    
+    # El número secreto está entre 1 y 100
+    numero_secreto = random.randint(1, 100)
+    intentos = 10
+    
+    print("Tienes 10 intentos para adivinar el número.")
+    
+    while intentos > 0:
+        # Solicitar al usuario que ingrese un número
+        try:
+            adivinanza = int(input(f"Tienes {intentos} intentos restantes. Adivina un número entre 1 y 100: "))
+        except ValueError:
+            print("Por favor, ingresa un número válido.")
+            continue
+        
+        # Verificar si el número adivinado es correcto
+        if adivinanza == numero_secreto:
+            print(f"¡Felicidades! Has adivinado el número {numero_secreto} correctamente.")
+            break
+        
+        # Dar pistas sobre si está caliente, tibio o frío
+        diferencia = abs(numero_secreto - adivinanza)
+        
+        if diferencia == 0:
+            print("¡Correcto! Has adivinado el número.")
+            break
+        elif diferencia <= 5:
+            print("¡Caliente! Estás muy cerca del número.")
+        elif diferencia <= 15:
+            print("¡Tibio! Estás algo cerca del número.")
+        else:
+            print("¡Frío! Estás lejos del número.")
+        
+        # Reducir los intentos
+        intentos -= 1
+    
+    if intentos == 0:
+        print(f"Lo siento, has agotado tus intentos. El número secreto era {numero_secreto}. ¡Mejor suerte la próxima vez!")
+
+# Llamar a la función para iniciar el juego
+adivinar_numero()
