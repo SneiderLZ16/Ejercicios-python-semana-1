@@ -1,5 +1,6 @@
 import random
 
+
 # Función para jugar a adivinar el número
 def adivinar_numero():
     print("¡Bienvenido al juego de adivinar el número!")
